@@ -1,4 +1,3 @@
-import sys
 import asyncio
 import logging
 from os import getenv
@@ -12,14 +11,14 @@ from aiogram.enums import ParseMode
 from handlers.user_private import user_private_router
 from handlers.admin_private import admin_private_router
 from cmd_list import private
-# from handlers.database import create_table
+from handlers.database import create_table
 from handlers.classes_functions import CheckSubscribe, AntiFloodMiddleware
 
 
 async def main() -> None:
     load_dotenv()
 
-    # await create_table()
+    await create_table()
     bot = Bot(getenv('bot_key'), default=DefaultBotProperties(parse_mode=ParseMode.HTML))
     dp = Dispatcher()
 
@@ -33,8 +32,6 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    if sys.platform == "win32":
-        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
     logging.basicConfig(level=logging.INFO)
     try:
